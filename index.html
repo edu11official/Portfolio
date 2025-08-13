@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfólio</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <div class="particulas"></div>
+
+    <nav class="navegacao">
+        <ul class="menu">
+            <li>
+                <a href="#inicio" class="menu-link">Início</a>
+            </li>
+            <li>
+                <a href="#sobre" class="menu-link">Sobre</a>
+            </li>
+            <li>
+                <a href="#projetos" class="menu-link">Projetos</a>
+            </li>
+            <li>
+                <a href="#contatos" class="menu-link">Contatos</a>
+            </li>
+        </ul>
+    </nav>
+
+    <main id="inicio" class="cabecalho">
+        <img src="./img/edtII.jpg" alt="Foto de Eduardo Souza" class="foto-perfil">
+        <h1>Eduardo Souza</h1>
+        <p class="cabecalho-sub-titulo">Desenvolvedor Junior</p>
+    </main>
+
+    <section id="sobre" class="sobre">
+        <h2 class="sobre-titulo">Sobre Mim</h2>
+        <div class="sobre-caixa">
+            <p class="sobre-paragrafo">
+                Oi! Eu sou o Eduardo Souza, tenho 31 anos e sou um entusiasta da tecnologia que está trilhando o caminho
+                para se tornar um desenvolvedor.
+                Sou formado em Análise e Desenvolvimento de Sistemas e atualmente trabalho com suporte técnico, onde
+                tenho contato com bancos de dados, APIs e integrações de sistemas.
+
+                Curioso por natureza, estou sempre estudando, praticando e buscando melhorar minhas habilidades em
+                programação. Gosto de desafios e de aprender coisas novas todos os dias.
+
+                Aqui no meu portfólio você encontra alguns dos meus projetos. Fique à vontade para explorar e trocar uma
+                ideia comigo!
+            </p>
+        </div>
+    </section>
+
+    <section id="projetos" class="projetos">
+        <h2 class="projetos-titulo">Meus Projetos</h2>
+        <div class="projetos-caixa">
+            <div class="projetos-card">
+                <img src="./img/SiteAmbicao.png" alt="Projeto 1" class="projetos-imagem">
+                <div class="caixa-texto-projetos">
+                    <h3 class="info-projetos">Site Ambição Inflamada</h3>
+                    <p class="paragrafo-projetos">Site desenvolvido para uma página do instagram, com design moderno e
+                        responsivo.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contatos" class="contatos">
+        <h2 class="contatos-titulo">Entre em contato</h2>
+        <div class="redes-sociais">
+            <a href="https://www.linkedin.com/feed/" target="_blank" class="linkedin">
+                <img src="./img/Icon_linkedin.png" alt="LinkedIn">
+            </a>
+
+            <a href="https://github.com/edu11official" target="_blank" class="github">
+                <img src="./img/Icon_github_Claro.png" alt="Github">
+            </a>
+
+            <a href="https://www.instagram.com/edu11official/" target="_blank" class="instagram">
+                <img src="./img/Icon_instagram_claro.png" alt="Instagram">
+            </a>
+        </div>
+
+        <div class="email-box">
+            <div class="email-icon">
+                <img src="./img/IconMail.png" alt="Ícone de e-mail">
+            </div>
+            <a href="mailto:eduardosouza011ofc@gmail.com" class="email-link">
+                eduardosouza011ofc@gmail.com
+            </a>
+        </div>
+
+        <form class="formulario-contato" id="formulario" onsubmit="enviarWhats(event)">
+            <div class="grupo-form">
+                <input placeholder="Nome" class="campo-form" id="nome">
+            </div>
+            <div class="grupo-form">
+                <textarea class="campo-form" placeholder="Digite sua mensagem" rows="5" id="mensagem"></textarea>
+            </div>
+
+            <button type="submit" class="botao-form">Enviar Whatsapp</button>
+        </form>
+    </section>
+
+<script>
+    // Função para enviar mensagem via WhatsApp    
+    function enviarWhats(event) {
+        event.preventDefault(); // Impede o envio do formulário padrão
+
+        const nome = document.getElementById('nome').value.trim();
+        const mensagem = document.getElementById('mensagem').value.trim();
+        const telefone = '5511945592412';
+
+        if (!nome || !mensagem) {
+            alert('Por favor, preencha seu nome e mensagem.');
+            return;
+        }
+
+        const texto = `Olá! Me chamo ${nome}, ${mensagem}`;
+        const msgFormatada = encodeURIComponent(texto);
+        const url = `https://wa.me/${telefone}?text=${msgFormatada}`;
+
+        window.open(url, '_blank');
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const emailLink = document.querySelector('.email-link');
+        const email = 'eduardosouza011ofc@gmail.com';
+
+        emailLink.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            navigator.clipboard.writeText(email).then(() => {
+                const originalText = emailLink.textContent;
+                emailLink.textContent = 'E-mail copiado!';
+                emailLink.style.color = '#7c3aed';
+
+                setTimeout(() => {
+                    emailLink.textContent = originalText;
+                    emailLink.style.color = '';
+                }, 2000);
+            }).catch(() => {
+                // Fallback para navegadores sem suporte
+                const textarea = document.createElement('textarea');
+                textarea.value = email;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+
+                emailLink.textContent = 'E-mail copiado!';
+                setTimeout(() => {
+                    emailLink.textContent = email;
+                }, 2000);
+            });
+        });
+    });
+</script>
+
+</body>
+
+</html>
